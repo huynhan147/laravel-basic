@@ -39,9 +39,21 @@ Route::post('/posts','PostsController@store');
 //Route::get('/admins',function(){
 //
 //});
+Route::post('/posts/{id}/comments','CommentsController@store');
 Route::group(['prefix'=>'/admins'],function(){
     Route::get('/province','ProvinceController@index');
     Route::get('/province/{id}','ProvinceController@show');
     Route::get('/province-add','ProvinceController@add');
     Route::post('/province','ProvinceController@store');
 });
+
+//Auth::routes();
+
+Route::get('/home', 'PostsController@index')->name('home');
+Route::get('/login','SessionController@create');
+Route::post('/login','SessionController@store');
+Route::get('/register','RegistrationController@create');
+Route::post('/register','RegistrationController@store');
+Route::get('/logout','SessionController@destroy');
+
+
