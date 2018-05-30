@@ -8,9 +8,9 @@
     <title>Laravel</title>
 </head>
 <body>
-    @foreach ($tasks as $t)
-        <li>{{ $t->body }}</li>
-    @endforeach
+{{--@foreach ($tasks as $t)--}}
+    <li>{{ $task->body }}</li>
+{{--@endforeach--}}
 
 </body>
 </html>

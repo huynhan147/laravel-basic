@@ -10,17 +10,17 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-Route::get('/', function () {
-    $task = [
-        'Go to store',
-        'Test Laravel',
-        'Laravel Basic'
+use App\Tasks;
 
 
-    ];
-    return view('welcome',compact('task'));
-});
+
+Route::get('/tasks','TasksController@index');
+Route::get('/tasks/{task}','TasksController@show');
+
+
+
+
+
 Route::get('about',function(){
     return view('about');
 });
