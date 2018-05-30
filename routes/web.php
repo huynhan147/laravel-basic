@@ -19,7 +19,7 @@ use App\Tasks;
 
 
 Route::get('/province/{id}',function($id){
-   $test = App\Models\Province::find($id);
+   $test = App\Models\Praovince::find($id);
    dd($test->name);
 });
 
@@ -36,4 +36,12 @@ Route::get('/','PostsController@index');
 Route::get('/posts/{post}','PostsController@show');
 Route::get('/post/create','PostsController@create');
 Route::post('/posts','PostsController@store');
-
+//Route::get('/admins',function(){
+//
+//});
+Route::group(['prefix'=>'/admins'],function(){
+    Route::get('/province','ProvinceController@index');
+    Route::get('/province/{id}','ProvinceController@show');
+    Route::get('/province-add','ProvinceController@add');
+    Route::post('/province','ProvinceController@store');
+});
