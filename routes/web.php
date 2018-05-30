@@ -14,8 +14,8 @@ use App\Tasks;
 
 
 
-Route::get('/tasks','TasksController@index');
-Route::get('/tasks/{task}','TasksController@show');
+//Route::get('/tasks','TasksController@index');
+//Route::get('/tasks/{task}','TasksController@show');
 
 
 Route::get('/province/{id}',function($id){
@@ -28,3 +28,12 @@ Route::get('about',function(){
     return view('about');
 });
 Route::get('my-cv','MycvController@index');
+
+
+
+
+Route::get('/','PostsController@index');
+Route::get('/posts/{post}','PostsController@show');
+Route::get('/post/create','PostsController@create');
+Route::post('/posts','PostsController@store');
+
