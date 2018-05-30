@@ -18,7 +18,10 @@ Route::get('/tasks','TasksController@index');
 Route::get('/tasks/{task}','TasksController@show');
 
 
-
+Route::get('/province/{id}',function($id){
+   $test = App\Models\Province::find($id);
+   dd($test->name);
+});
 
 
 Route::get('about',function(){
