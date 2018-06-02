@@ -10,12 +10,11 @@ class CommentsController extends Controller
 {
     //
     public function store(Post $post){
-//        dd();
-//        dd($post->id);
-//        $post->addComment(request('body'),request('id'));
+//        dd(request()->all());
         Comment::create([
             'post_id'=>request()->id,
-           'body'=>request('body')
+            'body'=>request('body'),
+            'user_id'=>auth()->id()
 
         ]);
         return back();

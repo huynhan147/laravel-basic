@@ -27,14 +27,17 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
     public function posts(){
-         return $this->hasMany(Post::class);
+        return $this->hasMany(Post::class);
+    }
+    public function comments(){
+        return $this->hasMany(Comment::class);
     }
     public function publish(Post $post){
         $this->posts()->save($post);
-//        Post::create([
-//            'title'=>request('title'),
-//            'body'=>request('body'),
-//            'user_id'=>auth()-id()
-//        ]);
+
+    }
+
+    public function setPasswordAttribute($pass){
+        $this->attributes['password'] = bcrypt($pass);
     }
 }

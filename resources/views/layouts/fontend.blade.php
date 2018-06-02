@@ -20,19 +20,24 @@
 <body>
 <div class="container">
     @include('layouts.nav');
+    @if($flash = session('message'))
+        <div id="alert-flash" class="alert alert-success" role="alert">
+            {{ $flash }}
+        </div>
+    @endif
     <main role="main" class="container">
         <div class="row">
             <div class="col-md-8 blog-main">
                 <h3 class="pb-3 mb-4 font-italic border-bottom">
-                    From the Firehose
+                    List Post
                 </h3>
 
-{{--<div class="container">--}}
-    @yield('content')
-{{--</div>--}}
-    @include('layouts.sidebar')
+                {{--<div class="container">--}}
+                @yield('content')
+                {{--</div>--}}
+                @include('layouts.sidebar')
 
-@include('layouts.footer')
-</div>
+                @include('layouts.footer')
+            </div>
 </body>
 </html>

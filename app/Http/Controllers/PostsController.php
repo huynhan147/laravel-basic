@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Repositories\Posts;
 use Illuminate\Http\Request;
 use App\Post;
 use Carbon\Carbon;
+use App\Http\Requests\RegistrationForm;
 
 class PostsController extends Controller
 {
@@ -13,28 +15,14 @@ class PostsController extends Controller
         $this->middleware('auth')->except('index','show');
     }
 
-    public function index(){
-        $posts = Post::latest()->filter(request(['month','year']))->get();
-//        $posts = Post::latest();
-//        if($month = request('month')){
-//            $posts->whereMonth('created_at', Carbon::parse($month)->month);
-//        }
-//        if($year = request('year')){
-//            $posts->whereYear('created_at',$year);
-//        }
-//        $posts = $posts->get();
+    public function index(Posts $posts){
+        $posts = $posts->all();
 
-
-
-        $archives= Post::selectRaw('year(created_at) year,monthname(created_at) month, count(*) published')
-            ->groupBy('year','month')
-            ->get()
-            ->toArray();
-//        return $archives;
-        return view('posts.index',compact('posts','archives'));
+        return view('posts.index',compact('posts'));
     }
     public function show(Post $post){
 //        $post = Post::find($id);
+//        dd(count($post->tags));
         return view('posts.show',compact('post'));
     }
     public function create(){
@@ -43,18 +31,14 @@ class PostsController extends Controller
     }
     public function store(){
         $this->validate(request(),[
-           'title'=>'required',
+            'title'=>'required',
             'body'=>'required',
 
         ]);
         auth()->user()->publish(
             new Post(request(['title','body']))
         );
-//        Post::create([
-//            'title'=>request('title'),
-//            'body'=>request('body'),
-//            'user_id'=>auth()->id()
-//        ]);
+        session()->flash('message','Success Post');
         return redirect('/');
     }
 }

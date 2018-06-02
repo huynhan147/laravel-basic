@@ -34,17 +34,19 @@ Route::get('my-cv','MycvController@index');
 
 Route::get('/','PostsController@index');
 Route::get('/posts/{post}','PostsController@show');
-Route::get('/post/create','PostsController@create');
+
 Route::post('/posts','PostsController@store');
 //Route::get('/admins',function(){
 //
 //});
 Route::post('/posts/{id}/comments','CommentsController@store');
+Route::get('/posts/tags/{tag}','TagsController@index');
 Route::group(['prefix'=>'/admins'],function(){
     Route::get('/province','ProvinceController@index');
     Route::get('/province/{id}','ProvinceController@show');
     Route::get('/province-add','ProvinceController@add');
     Route::post('/province','ProvinceController@store');
+    Route::get('/post/create','PostsController@create');
 });
 
 //Auth::routes();
